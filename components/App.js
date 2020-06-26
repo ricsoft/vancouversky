@@ -1,11 +1,12 @@
 import React from 'react';
-import {Container} from 'native-base';
-import AppHeader from './components/AppHeader';
+import {Container, Text} from 'native-base';
+import AppHeader from './AppHeader';
 
 const App = () => {
   return (
     <Container>
       <AppHeader />
+      <Text>App page</Text>
     </Container>
   );
 };
