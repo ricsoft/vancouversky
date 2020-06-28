@@ -1,12 +1,12 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Header, Title, Left, Right, Body, Button, Icon} from 'native-base';
-import {themeBackgroundLight, themeText} from './../constants';
+import {ThemeBackgroundLight, ThemeText} from './../constants';
 
 const AppHeader = ({MenuActive, setMenuActive}) => {
   const styles = StyleSheet.create({
     header: {
-      backgroundColor: themeBackgroundLight,
+      backgroundColor: ThemeBackgroundLight,
     },
     left: {
       flex: 1,
@@ -15,13 +15,13 @@ const AppHeader = ({MenuActive, setMenuActive}) => {
       flex: 1,
     },
     title: {
-      color: themeText,
+      color: ThemeText,
     },
     right: {
       flex: 1,
     },
     icon: {
-      color: themeText,
+      color: ThemeText,
     },
   });
 

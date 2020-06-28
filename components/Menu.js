@@ -2,7 +2,7 @@ import React from 'react';
 import {Navigation} from 'react-native-navigation';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {CardItem, Body, Text} from 'native-base';
-import {themeText} from './../constants';
+import {ThemeText} from './../constants';
 
 const Menu = ({componentId, MenuActive, setMenuActive, ExitMenu}) => {
   const styles = StyleSheet.create({
@@ -25,7 +25,7 @@ const Menu = ({componentId, MenuActive, setMenuActive, ExitMenu}) => {
       marginRight: 5,
       textAlign: 'right',
       fontSize: 20,
-      color: themeText,
+      color: ThemeText,
     },
   });
 

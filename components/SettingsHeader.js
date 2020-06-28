@@ -2,12 +2,12 @@ import React from 'react';
 import {Navigation} from 'react-native-navigation';
 import {StyleSheet} from 'react-native';
 import {Header, Title, Left, Right, Body, Button, Icon} from 'native-base';
-import {themeBackgroundLight, themeText} from './../constants';
+import {ThemeBackgroundLight, ThemeText} from './../constants';
 
 const SettingsHeader = ({componentId}) => {
   const styles = StyleSheet.create({
     header: {
-      backgroundColor: themeBackgroundLight,
+      backgroundColor: ThemeBackgroundLight,
     },
     left: {
       flex: 1,
@@ -17,13 +17,13 @@ const SettingsHeader = ({componentId}) => {
     },
     title: {
       alignSelf: 'center',
-      color: themeText,
+      color: ThemeText,
     },
     right: {
       flex: 1,
     },
     icon: {
-      color: themeText,
+      color: ThemeText,
     },
   });
 

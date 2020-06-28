@@ -4,14 +4,14 @@ import {Content, Container, Text} from 'native-base';
 import AppHeader from './AppHeader';
 import Modal from './Modal';
 import Menu from './Menu';
-import {themeBackground} from './../constants';
+import {ThemeBackground} from './../constants';
 
 const App = ({componentId}) => {
   const [MenuActive, setMenuActive] = useState(false);
 
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: themeBackground,
+      backgroundColor: ThemeBackground,
     },
   });
 
