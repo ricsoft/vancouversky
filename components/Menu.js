@@ -3,7 +3,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {CardItem, Body, Text} from 'native-base';
 import {themeText} from './../constants';
 
-const Menu = ({MenuActive, setMenuActive}) => {
+const Menu = ({MenuActive, setMenuActive, ExitMenu}) => {
   const styles = StyleSheet.create({
     carditem: {
       width: 140,
@@ -27,10 +27,6 @@ const Menu = ({MenuActive, setMenuActive}) => {
       color: themeText,
     },
   });
-
-  const ExitMenu = () => {
-    setMenuActive(false);
-  };
 
   const SettingsPressed = () => {
     ExitMenu();
