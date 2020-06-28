@@ -1,9 +1,10 @@
 import React from 'react';
+import {Navigation} from 'react-native-navigation';
 import {StyleSheet} from 'react-native';
 import {Header, Title, Left, Right, Body, Button, Icon} from 'native-base';
-import {ThemeBackgroundLight, ThemeText} from './../constants';
+import {ThemeBackgroundLight, ThemeText} from '../../constants';
 
-const AppHeader = ({MenuActive, setMenuActive}) => {
+const SettingsHeader = ({componentId}) => {
   const styles = StyleSheet.create({
     header: {
       backgroundColor: ThemeBackgroundLight,
@@ -15,6 +16,7 @@ const AppHeader = ({MenuActive, setMenuActive}) => {
       flex: 1,
     },
     title: {
+      alignSelf: 'center',
       color: ThemeText,
     },
     right: {
@@ -25,23 +27,19 @@ const AppHeader = ({MenuActive, setMenuActive}) => {
     },
   });
 
-  const OpenMenu = () => {
-    setMenuActive(!MenuActive);
-  };
-
   return (
     <Header style={styles.header}>
-      <Left style={styles.left} />
-      <Body style={styles.body}>
-        <Title style={styles.title}>Vancouver Sky</Title>
-      </Body>
-      <Right style={styles.right}>
-        <Button transparent onPress={OpenMenu}>
-          <Icon style={styles.icon} name="more" />
+      <Left style={styles.left}>
+        <Button transparent onPress={() => Navigation.pop(componentId)}>
+          <Icon style={styles.icon} name="arrow-back" />
         </Button>
-      </Right>
+      </Left>
+      <Body style={styles.body}>
+        <Title style={styles.title}>Settings</Title>
+      </Body>
+      <Right style={styles.right} />
     </Header>
   );
 };
 
-export default AppHeader;
+export default SettingsHeader;

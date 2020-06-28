@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Container, Text} from 'native-base';
 import SettingsHeader from './SettingsHeader';
-import {ThemeBackground} from './../constants';
+import {ThemeBackground} from '../../constants';
 
 const Settings = ({componentId}) => {
   const styles = StyleSheet.create({

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {DeviceWidth, DeviceHeight} from './../constants';
+import {DeviceWidth, DeviceHeight} from '../../constants';
 
 const Settings = ({MenuActive, setMenuActive, ExitMenu}) => {
   const styles = StyleSheet.create({

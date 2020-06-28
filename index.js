@@ -1,6 +1,6 @@
 import {Navigation} from 'react-native-navigation';
-import App from './components/App';
-import Settings from './components/Settings';
+import App from './src/components/App';
+import Settings from './src/components/Settings';
 
 Navigation.registerComponent('App', () => App);
 Navigation.registerComponent('Settings', () => Settings);

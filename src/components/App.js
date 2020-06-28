@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Content, Container, Text} from 'native-base';
+import {FetchData} from '../helpers/Helpers';
 import AppHeader from './AppHeader';
 import Modal from './Modal';
 import Menu from './Menu';
-import {ThemeBackground} from './../constants';
+import {ThemeBackground} from '../../constants';
 
 const App = ({componentId}) => {
   const [MenuActive, setMenuActive] = useState(false);
@@ -16,6 +17,8 @@ const App = ({componentId}) => {
   });
 
   const ExitMenu = () => {
+    let x = FetchData();
+    console.log(x);
     setMenuActive(false);
   };
 
