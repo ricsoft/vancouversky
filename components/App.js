@@ -6,18 +6,12 @@ import Modal from './Modal';
 import Menu from './Menu';
 import {themeBackground} from './../constants';
 
-const App = () => {
+const App = ({componentId}) => {
   const [MenuActive, setMenuActive] = useState(false);
 
   const styles = StyleSheet.create({
     container: {
       backgroundColor: themeBackground,
-    },
-    content: {
-      position: 'relative',
-    },
-    text: {
-      position: 'relative',
     },
   });
 
@@ -28,8 +22,8 @@ const App = () => {
   return (
     <Container style={styles.container}>
       <AppHeader MenuActive={MenuActive} setMenuActive={setMenuActive} />
-      <Content style={styles.content}>
-        <Text style={styles.text}>App page</Text>
+      <Content>
+        <Text>App page</Text>
       </Content>
       <Modal
         MenuActive={MenuActive}
@@ -37,6 +31,7 @@ const App = () => {
         ExitMenu={ExitMenu}
       />
       <Menu
+        componentId={componentId}
         MenuActive={MenuActive}
         setMenuActive={setMenuActive}
         ExitMenu={ExitMenu}

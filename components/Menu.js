@@ -1,9 +1,10 @@
 import React from 'react';
+import {Navigation} from 'react-native-navigation';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {CardItem, Body, Text} from 'native-base';
 import {themeText} from './../constants';
 
-const Menu = ({MenuActive, setMenuActive, ExitMenu}) => {
+const Menu = ({componentId, MenuActive, setMenuActive, ExitMenu}) => {
   const styles = StyleSheet.create({
     carditem: {
       width: 140,
@@ -30,6 +31,12 @@ const Menu = ({MenuActive, setMenuActive, ExitMenu}) => {
 
   const SettingsPressed = () => {
     ExitMenu();
+    console.log('Menu ' + componentId);
+    Navigation.push(componentId, {
+      component: {
+        name: 'Settings',
+      },
+    });
   };
 
   const ExitPressed = () => {
