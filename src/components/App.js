@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {Content, Container, Text} from 'native-base';
 import {FetchData} from '../helpers/Helpers';
@@ -8,6 +8,7 @@ import Menu from './Menu';
 import {ThemeBackground} from '../../constants';
 
 const App = ({componentId}) => {
+  const [Data, setData] = useState(null);
   const [MenuActive, setMenuActive] = useState(false);
 
   const styles = StyleSheet.create({
@@ -17,10 +18,12 @@ const App = ({componentId}) => {
   });
 
   const ExitMenu = () => {
-    let x = FetchData();
-    console.log(x);
     setMenuActive(false);
   };
+
+  useEffect(() => {
+    setData(FetchData());
+  }, []);
 
   return (
     <Container style={styles.container}>
