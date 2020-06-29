@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import {Navigation} from 'react-native-navigation';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {CardItem, Body, Text} from 'native-base';
-import {ThemeText} from '../../constants';
+import {DeviceWidth, DeviceHeight, ThemeText} from '../../constants';
 
-const Menu = ({componentId, MenuActive, setMenuActive, ExitMenu}) => {
+const Menu = ({componentId, MenuActive, ExitMenu}) => {
   const styles = StyleSheet.create({
     carditem: {
       width: 140,
@@ -27,6 +27,11 @@ const Menu = ({componentId, MenuActive, setMenuActive, ExitMenu}) => {
       fontSize: 20,
       color: ThemeText,
     },
+    touchableopacity: {
+      width: DeviceWidth,
+      height: DeviceHeight,
+      position: 'absolute',
+    },
   });
 
   const SettingsPressed = () => {
@@ -44,16 +49,19 @@ const Menu = ({componentId, MenuActive, setMenuActive, ExitMenu}) => {
   };
 
   const menu = MenuActive ? (
-    <CardItem style={styles.carditem}>
-      <Body style={styles.body}>
-        <TouchableOpacity onPress={SettingsPressed}>
-          <Text style={styles.text}>Settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={ExitPressed}>
-          <Text style={styles.text}>Exit</Text>
-        </TouchableOpacity>
-      </Body>
-    </CardItem>
+    <Fragment>
+      <TouchableOpacity style={styles.touchableopacity} onPress={ExitMenu} />
+      <CardItem style={styles.carditem}>
+        <Body style={styles.body}>
+          <TouchableOpacity onPress={SettingsPressed}>
+            <Text style={styles.text}>Settings</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={ExitPressed}>
+            <Text style={styles.text}>Exit</Text>
+          </TouchableOpacity>
+        </Body>
+      </CardItem>
+    </Fragment>
   ) : null;
 
   return menu;

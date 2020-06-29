@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 import {Content, Container, Text} from 'native-base';
 import {FetchData} from '../helpers/Helpers';
 import AppHeader from './AppHeader';
-import Modal from './Modal';
 import Menu from './Menu';
 import {ThemeBackground} from '../../constants';
 
@@ -31,15 +30,9 @@ const App = ({componentId}) => {
       <Content>
         <Text>App page</Text>
       </Content>
-      <Modal
-        MenuActive={MenuActive}
-        setMenuActive={setMenuActive}
-        ExitMenu={ExitMenu}
-      />
       <Menu
         componentId={componentId}
         MenuActive={MenuActive}
-        setMenuActive={setMenuActive}
         ExitMenu={ExitMenu}
       />
     </Container>
