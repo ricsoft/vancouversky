@@ -7,7 +7,7 @@ const RiseSet = ({Data}) => {
 
   return (
     <View>
-      <Text>Sunrise: {Data.sunrise.$.zone}</Text>
+      <Text>Sunrise: {Data.sunrise.year}</Text>
       <Text>Sunset: </Text>
     </View>
   );
