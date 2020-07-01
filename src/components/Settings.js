@@ -1,21 +1,22 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {Container, Text} from 'native-base';
+import {View, Text} from 'native-base';
 import SettingsHeader from './SettingsHeader';
 import {ThemeBackground} from '../../constants';
 
 const Settings = ({componentId}) => {
   const styles = StyleSheet.create({
-    container: {
+    view: {
+      height: '100%',
       backgroundColor: ThemeBackground,
     },
   });
 
   return (
-    <Container style={styles.container}>
+    <View style={styles.view}>
       <SettingsHeader componentId={componentId} />
       <Text>Settings Page</Text>
-    </Container>
+    </View>
   );
 };
 
