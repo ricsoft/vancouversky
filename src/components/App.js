@@ -1,23 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {Content, Container, Text} from 'native-base';
-import {FetchData} from '../helpers/Helpers';
+import {FetchData, ExitMenu} from '../helpers/Helpers';
 import AppHeader from './AppHeader';
 import Menu from './Menu';
-import RiseSet from './RiseSet';
+import DailySwitch from './DailySwitch';
+import Hourly from './Hourly';
+import Forecast from './Forecast';
 import {ThemeBackground} from '../../constants';
 
 const App = ({componentId}) => {
   const [Loading, setLoading] = useState(true);
   const [Data, setData] = useState(null);
   const [MenuActive, setMenuActive] = useState(false);
+  const [DailyActive, setDailyActive] = useState(true);
 
   useEffect(() => {
     FetchData(setLoading, setData);
   }, []);
 
-  const ExitMenu = () => {
-    setMenuActive(false);
+  const HeaderData = {
+    title: 'Vancouver Sky',
   };
 
   const styles = StyleSheet.create({
@@ -28,20 +31,35 @@ const App = ({componentId}) => {
 
   return (
     <Container style={styles.container}>
-      <AppHeader MenuActive={MenuActive} setMenuActive={setMenuActive} />
+      <AppHeader
+        MenuActive={MenuActive}
+        setMenuActive={setMenuActive}
+        HeaderData={HeaderData}
+      />
       {Loading ? (
         <Content>
           <Text>Spinner</Text>
         </Content>
       ) : (
         <Content>
-          <RiseSet Data={Data} />
+          <DailySwitch
+            DailyActive={DailyActive}
+            setDailyActive={setDailyActive}
+          />
+          <Forecast
+            DailyActive={DailyActive}
+            Current={Data.current}
+            RiseSetData={Data.riseSet}
+            Forecast={Data.forecast}
+            ForecastFuture={Data.forecastFuture}
+          />
+          <Hourly DailyActive={DailyActive} Data={Data.hourly} />
         </Content>
       )}
       <Menu
-        componentId={componentId}
         MenuActive={MenuActive}
-        ExitMenu={ExitMenu}
+        componentId={componentId}
+        ExitMenu={() => ExitMenu(setMenuActive)}
       />
     </Container>
   );

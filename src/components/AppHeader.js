@@ -1,9 +1,20 @@
-import React from 'react';
+import React, {Fragment} from 'react';
+import {Navigation} from 'react-native-navigation';
 import {StyleSheet} from 'react-native';
 import {Header, Title, Left, Right, Body, Button, Icon} from 'native-base';
 import {ThemeBackgroundLight, ThemeText} from '../../constants';
 
-const AppHeader = ({MenuActive, setMenuActive}) => {
+const AppHeader = ({
+  MenuActive,
+  setMenuActive,
+  HeaderData,
+  BackButton = false,
+  componentId = null,
+}) => {
+  const OpenMenu = () => {
+    setMenuActive(!MenuActive);
+  };
+
   const styles = StyleSheet.create({
     header: {
       backgroundColor: ThemeBackgroundLight,
@@ -15,6 +26,7 @@ const AppHeader = ({MenuActive, setMenuActive}) => {
       flex: 1,
     },
     title: {
+      alignSelf: 'center',
       color: ThemeText,
     },
     right: {
@@ -25,15 +37,19 @@ const AppHeader = ({MenuActive, setMenuActive}) => {
     },
   });
 
-  const OpenMenu = () => {
-    setMenuActive(!MenuActive);
-  };
-
   return (
     <Header style={styles.header}>
-      <Left style={styles.left} />
+      <Left style={styles.left}>
+        {BackButton ? (
+          <Button transparent onPress={() => Navigation.pop(componentId)}>
+            <Icon style={styles.icon} name="arrow-back" />
+          </Button>
+        ) : (
+          <Fragment />
+        )}
+      </Left>
       <Body style={styles.body}>
-        <Title style={styles.title}>Vancouver Sky</Title>
+        <Title style={styles.title}>{HeaderData.title}</Title>
       </Body>
       <Right style={styles.right}>
         <Button transparent onPress={OpenMenu}>

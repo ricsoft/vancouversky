@@ -1,10 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import {View, Text} from 'native-base';
-import SettingsHeader from './SettingsHeader';
+import {Container, Text} from 'native-base';
+import AppHeader from './AppHeader';
+import Menu from './Menu';
+import {ExitMenu} from '../helpers/Helpers';
 import {ThemeBackground} from '../../constants';
 
 const Settings = ({componentId}) => {
+  const [MenuActive, setMenuActive] = useState(false);
+
+  const HeaderData = {
+    title: 'Settings',
+  };
+
   const styles = StyleSheet.create({
     view: {
       height: '100%',
@@ -13,10 +21,22 @@ const Settings = ({componentId}) => {
   });
 
   return (
-    <View style={styles.view}>
-      <SettingsHeader componentId={componentId} />
+    <Container style={styles.view}>
+      <AppHeader
+        MenuActive={MenuActive}
+        setMenuActive={setMenuActive}
+        HeaderData={HeaderData}
+        BackButton
+        componentId={componentId}
+      />
       <Text>Settings Page</Text>
-    </View>
+      <Menu
+        componentId={componentId}
+        MenuActive={MenuActive}
+        ExitMenu={() => ExitMenu(setMenuActive)}
+        isSettings
+      />
+    </Container>
   );
 };
 
