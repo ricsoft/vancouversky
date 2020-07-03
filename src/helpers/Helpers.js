@@ -25,7 +25,10 @@ export const ParseData = data => {
 
   let current = {
     icon: parseInt(data.siteData.currentConditions[0].iconCode[0]._, 10),
-    temperature: parseInt(data.siteData.currentConditions[0].temperature[0]._).toString(),
+    temperature: parseInt(
+      data.siteData.currentConditions[0].temperature[0]._,
+      10,
+    ).toString(),
     condition: data.siteData.currentConditions[0].condition[0],
     wind: {
       speed: data.siteData.currentConditions[0].wind[0].speed[0]._,
@@ -92,16 +95,19 @@ const ParseForecast = Data => {
   let now = [];
   let later = [];
   let skip = false;
+  let todayTonightCount = 0;
 
   Data.map((data, index) => {
     // If this object was already added then don't process again
     if (!skip) {
       if (
-        data.period[0].$.textForecastName === 'Today' ||
+        (todayTonightCount < 2 &&
+          data.period[0].$.textForecastName === 'Today') ||
         data.period[0].$.textForecastName === 'Tonight'
       ) {
         // The data is for today's forecast
         now.push(data);
+        todayTonightCount++;
       } else {
         if (Data[index + 1]) {
           try {

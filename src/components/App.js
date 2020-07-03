@@ -48,7 +48,7 @@ const App = ({componentId}) => {
           />
           <Forecast
             DailyActive={DailyActive}
-            Current={Data.current}
+            CurrentData={Data.current}
             RiseSetData={Data.riseSet}
             Forecast={Data.forecast}
             ForecastFuture={Data.forecastFuture}

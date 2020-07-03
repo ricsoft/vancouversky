@@ -8,24 +8,36 @@ const Current = ({CurrentData}) => {
     card: {
       marginLeft: 15,
       marginRight: 15,
-      marginBottom: 10,
+    },
+    headerText: {
+      fontSize: 18,
+      marginBottom: 5,
     },
     containerView: {
       width: '100%',
       flexDirection: 'row',
-      justifyContent: 'space-evenly',
     },
     iconView: {
-      minWidth: '15%',
+      width: '20%',
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    dayNightIcon: {
+      fontSize: 20,
+      color: 'black',
     },
     icon: {
       fontSize: 40,
       color: 'gray',
     },
+    textView: {
+      width: '80%',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+    },
     temperatureText: {
-      minWidth: '25%',
+      flex: 1,
+      flexGrow: 1,
       textAlignVertical: 'center',
       textAlign: 'center',
       fontSize: 28,
@@ -33,8 +45,9 @@ const Current = ({CurrentData}) => {
       color: ThemeText,
     },
     conditionText: {
-      maxWidth: '60%',
       paddingTop: 4,
+      flex: 1,
+      flexGrow: 2,
       textAlignVertical: 'center',
       fontSize: 21,
       fontWeight: '600',
@@ -46,7 +59,15 @@ const Current = ({CurrentData}) => {
     <Card style={styles.card}>
       <CardItem>
         <Body>
+          <Text style={styles.headerText}>Today</Text>
           <View style={styles.containerView}>
+            <View style={styles.iconView}>
+              <Icon
+                type="FontAwesome"
+                name="circle-thin"
+                style={styles.dayNightIcon}
+              />
+            </View>
             <View style={styles.iconView}>
               <Icon type="MaterialIcons" name="cloud" style={styles.icon} />
             </View>
