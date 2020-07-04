@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {Card, CardItem, Body, Text, View} from 'native-base';
 import Simple from './layouts/Simple';
 
-const Current = ({Forecast}) => {
+const Current = ({ForecastData}) => {
   const styles = StyleSheet.create({
     card: {
       marginLeft: 15,
@@ -27,7 +27,7 @@ const Current = ({Forecast}) => {
     <Card style={styles.card}>
       <CardItem>
         <Body>
-          {Forecast.map((data, index) => (
+          {ForecastData.map((data, index) => (
             <View style={AddMargin(index)} key={index}>
               <Text style={styles.headerText}>
                 {data.period[0].$.textForecastName}
@@ -37,7 +37,6 @@ const Current = ({Forecast}) => {
                 icon={data.abbreviatedForecast[0].iconCode[0]._}
                 temperature={data.temperatures[0].temperature[0]._}
                 condition={data.abbreviatedForecast[0].textSummary[0]}
-                key={index}
               />
             </View>
           ))}

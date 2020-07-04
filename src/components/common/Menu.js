@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Navigation} from 'react-native-navigation';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {CardItem, Body, Text} from 'native-base';
-import {DeviceWidth, DeviceHeight, ThemeText} from '../../constants';
+import {DeviceWidth, DeviceHeight, ThemeText} from '../../../constants';
 
 const Menu = ({
   componentId = null,

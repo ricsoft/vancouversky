@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Container, Text} from 'native-base';
-import AppHeader from './AppHeader';
-import Menu from './Menu';
+import AppHeader from './common/AppHeader';
+import Menu from './common/Menu';
 import {ExitMenu} from '../helpers/Helpers';
 import {ThemeBackground} from '../../constants';
 

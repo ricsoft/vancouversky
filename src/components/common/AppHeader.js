@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import {Navigation} from 'react-native-navigation';
 import {StyleSheet} from 'react-native';
 import {Header, Title, Left, Right, Body, Button, Icon} from 'native-base';
-import {ThemeBackgroundLight, ThemeText} from '../../constants';
+import {ThemeBackgroundLight, ThemeText} from '../../../constants';
 
 const AppHeader = ({
   MenuActive,

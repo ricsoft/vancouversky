@@ -127,7 +127,7 @@ export const ParseIcon = numStr => {
   ) {
     return {iconName: 'cloud', iconColor: 'dimgrey'};
   } else if (num >= 30 && num < 36) {
-    return {iconName: 'moon', iconColor: 'beige'};
+    return {iconName: 'moon', iconColor: 'palegoldenrod'};
   } else {
     return {iconName: 'help-circle', iconColor: 'black'};
   }
