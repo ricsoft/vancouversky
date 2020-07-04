@@ -88,6 +88,51 @@ export const ParseTime = time => {
   return newTimeStr + m;
 };
 
+export const ParseIcon = numStr => {
+  let num;
+
+  try {
+    num = parseInt(numStr, 10);
+  } catch {
+    return {name: 'help-circle', color: 'black'};
+  }
+
+  if ((num >= 0 && num < 6) || num === 22) {
+    return {iconName: 'sunny', iconColor: 'orange'};
+  } else if (
+    num === 6 ||
+    num === 9 ||
+    (num >= 11 && num < 15) ||
+    num === 19 ||
+    (num >= 27 && num < 29) ||
+    (num >= 36 && num < 38) ||
+    num === 39 ||
+    (num >= 41 && num < 44) ||
+    (num >= 46 && num < 49)
+  ) {
+    return {iconName: 'rainy', iconColor: 'dodgerblue'};
+  } else if (
+    (num >= 7 && num < 9) ||
+    (num >= 15 && num < 19) ||
+    (num >= 25 && num < 27) ||
+    num === 38 ||
+    num === 40
+  ) {
+    return {iconName: 'snow', iconColor: 'darkgrey'};
+  } else if (
+    num === 10 ||
+    (num >= 20 && num < 22) ||
+    (num >= 23 && num < 25) ||
+    (num >= 44 && num < 46)
+  ) {
+    return {iconName: 'cloud', iconColor: 'dimgrey'};
+  } else if (num >= 30 && num < 36) {
+    return {iconName: 'moon', iconColor: 'beige'};
+  } else {
+    return {iconName: 'help-circle', iconColor: 'black'};
+  }
+};
+
 export const ExitMenu = setMenuActive => {
   setMenuActive(false);
 };

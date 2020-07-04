@@ -1,9 +1,12 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {View, Text, Card, CardItem, Body, Icon} from 'native-base';
-import {ThemeText} from '../../constants';
+import {ParseIcon} from '../../helpers/Helpers';
+import {ThemeText} from '../../../constants';
 
-const SimpleTemplate = ({icon, title = null, temperature, condition}) => {
+const Simple = ({icon, title = null, temperature, condition}) => {
+  let {iconName, iconColor} = ParseIcon(icon);
+
   const styles = StyleSheet.create({
     card: {
       marginLeft: 15,
@@ -25,7 +28,6 @@ const SimpleTemplate = ({icon, title = null, temperature, condition}) => {
     },
     icon: {
       fontSize: 40,
-      color: 'gray',
     },
     textContainer: {
       width: '85%',
@@ -51,7 +53,6 @@ const SimpleTemplate = ({icon, title = null, temperature, condition}) => {
     },
   });
 
-  console.log('icon', icon);
   return (
     <Card style={styles.card}>
       <CardItem>
@@ -59,7 +60,10 @@ const SimpleTemplate = ({icon, title = null, temperature, condition}) => {
           {title ? <Text style={styles.headerText}>{title}</Text> : null}
           <View style={styles.containerView}>
             <View style={styles.iconView}>
-              <Icon type="MaterialIcons" name="cloud" style={styles.icon} />
+              <Icon
+                name={iconName}
+                style={{...styles.icon, color: iconColor}}
+              />
             </View>
             <View style={styles.textContainer}>
               <Text style={styles.temperatureText}>{temperature}°C</Text>
@@ -72,4 +76,4 @@ const SimpleTemplate = ({icon, title = null, temperature, condition}) => {
   );
 };
 
-export default SimpleTemplate;
+export default Simple;

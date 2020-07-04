@@ -1,9 +1,9 @@
 import React from 'react';
-import SimpleTemplate from './SimpleTemplate';
+import Simple from './layouts/Simple';
 
 const Current = ({CurrentData}) => {
   return (
-    <SimpleTemplate
+    <Simple
       icon={CurrentData.icon}
       temperature={CurrentData.temperature}
       condition={CurrentData.condition}
