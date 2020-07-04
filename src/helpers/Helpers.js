@@ -13,7 +13,6 @@ export const FetchData = async (setLoading, setData) => {
     }
     setData(ParseData(result));
     setLoading(false);
-    console.log('FETCHED');
   });
 };
 
@@ -127,7 +126,7 @@ export const ParseIcon = numStr => {
   ) {
     return {iconName: 'cloud', iconColor: 'dimgrey'};
   } else if (num >= 30 && num < 36) {
-    return {iconName: 'moon', iconColor: 'palegoldenrod'};
+    return {iconName: 'moon', iconColor: 'burlywood'};
   } else {
     return {iconName: 'help-circle', iconColor: 'black'};
   }

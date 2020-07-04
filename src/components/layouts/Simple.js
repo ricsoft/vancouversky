@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {View, Text, Card, CardItem, Body, Icon} from 'native-base';
+import {View, Text, Icon} from 'native-base';
 import {ParseIcon} from '../../helpers/Helpers';
 import {ThemeText} from '../../../constants';
 
@@ -21,10 +21,10 @@ const Simple = ({icon, temperature, condition}) => {
       fontSize: 40,
     },
     temperatureText: {
-      width: '25%',
+      width: '15%',
       paddingTop: 1,
       textAlignVertical: 'center',
-      textAlign: 'left',
+      textAlign: 'center',
       fontSize: 28,
       fontWeight: '700',
       color: ThemeText,
@@ -44,7 +44,7 @@ const Simple = ({icon, temperature, condition}) => {
       <View style={styles.iconView}>
         <Icon name={iconName} style={{...styles.icon, color: iconColor}} />
       </View>
-      <Text style={styles.temperatureText}>{temperature}°C</Text>
+      <Text style={styles.temperatureText}>{temperature}°</Text>
       <Text style={styles.conditionText}>{condition}</Text>
     </View>
   );
