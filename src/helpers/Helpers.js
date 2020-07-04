@@ -72,6 +72,7 @@ export const ParseTime = time => {
     }
   } else if (newTime === 0) {
     newTime = 500;
+    m = ' PM';
   } else if (newTime < 700) {
     newTime += 500;
     m = ' PM';

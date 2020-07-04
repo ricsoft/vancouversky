@@ -68,7 +68,7 @@ const Forecast = ({
   const forecast = DailyActive ? (
     <View>
       <Current CurrentData={CurrentData} />
-      <Today CurrentData={CurrentData} Forecast={Forecast} />
+      <Today Forecast={Forecast} />
     </View>
   ) : null;
 
