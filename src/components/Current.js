@@ -20,7 +20,7 @@ const Current = ({DetailsEnabled, CurrentData, RiseSetData}) => {
     },
   });
 
-  return (
+  let current = CurrentData ? (
     <Card style={styles.card}>
       <CardItem>
         <Body>
@@ -32,15 +32,17 @@ const Current = ({DetailsEnabled, CurrentData, RiseSetData}) => {
           />
           {DetailsEnabled ? (
             <Detailed
-              RiseSetData={RiseSetData}
               Wind={CurrentData.wind}
               Humidity={CurrentData.humidity}
+              RiseSetData={RiseSetData}
             />
           ) : null}
         </Body>
       </CardItem>
     </Card>
-  );
+  ) : null;
+
+  return current;
 };
 
 export default Current;

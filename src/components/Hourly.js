@@ -1,11 +1,10 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableOpacity, Linking} from 'react-native';
 import {View, Text, Icon} from 'native-base';
-import {ParseTime, ParseIcon} from '../helpers/Helpers';
-import {ThemeText} from '../../constants';
+import {ThemeText, HourlyBackup} from '../../constants';
 
 const Hourly = ({DailyActive, Data}) => {
-  let currentColor, previousCondition;
+  let previousCondition;
 
   const styles = StyleSheet.create({
     view: {
@@ -47,28 +46,39 @@ const Hourly = ({DailyActive, Data}) => {
       textAlignVertical: 'center',
       fontSize: 15,
     },
+    text: {
+      marginBottom: 10,
+      paddingHorizontal: 35,
+      textAlign: 'center',
+    },
   });
 
-  const hourly = DailyActive ? null : (
+  const hourly = DailyActive ? null : !Data ? (
+    <View style={styles.view}>
+      <Text style={styles.text}>Hourly Forecast Unavailable.</Text>
+      <Text style={styles.text}>Please Visit:</Text>
+      <TouchableOpacity onPress={() => Linking.openURL(HourlyBackup)}>
+        <Text style={{...styles.text, color: ThemeText}}>{HourlyBackup}</Text>
+      </TouchableOpacity>
+    </View>
+  ) : (
     <View style={styles.view}>
       {Data.map((data, index) => {
-        let {iconColor} = ParseIcon(data.iconCode[0]._);
-        previousCondition = index > 0 ? Data[index - 1].condition[0] : '';
-        currentColor = iconColor;
+        previousCondition = index > 0 ? Data[index - 1].condition : '';
 
         return (
           <View style={styles.container} key={index}>
-            <Text style={styles.time}>{ParseTime(data.$.dateTimeUTC)}</Text>
-            <Text style={styles.temperature}>{data.temperature[0]._}°</Text>
-            <View style={{...styles.bar, backgroundColor: currentColor}} />
-            {previousCondition !== data.condition[0] ? (
+            <Text style={styles.time}>{data.time}</Text>
+            <Text style={styles.temperature}>{data.temperature}°</Text>
+            <View style={{...styles.bar, backgroundColor: data.iconColor}} />
+            {previousCondition !== data.condition ? (
               <View style={styles.conditionView}>
                 <Icon
                   type="Octicons"
                   name="triangle-right"
-                  style={{...styles.icon, color: currentColor}}
+                  style={{...styles.icon, color: data.iconColor}}
                 />
-                <Text style={styles.condition}>{data.condition[0]}</Text>
+                <Text style={styles.condition}>{data.condition}</Text>
               </View>
             ) : null}
           </View>

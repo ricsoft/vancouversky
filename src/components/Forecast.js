@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, StyleSheet} from 'react-native';
 import {View, Text} from 'native-base';
-import {ThemeText, ThemeBackgroundLight} from '../../constants';
+import {ThemeText} from '../../constants';
 import Current from './Current';
 import Today from './Today';
 import Tomorrows from './Tomorrows';

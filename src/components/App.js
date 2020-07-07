@@ -10,6 +10,7 @@ import Forecast from './Forecast';
 import {ThemeBackground, ThemeText, DeviceHeight} from '../../constants';
 
 const App = ({componentId}) => {
+  const [Error, setError] = useState(null);
   const [Loading, setLoading] = useState(true);
   const [Data, setData] = useState(null);
   const [MenuActive, setMenuActive] = useState(false);
@@ -17,7 +18,7 @@ const App = ({componentId}) => {
   const [DetailsEnabled, setDetailsEnabled] = useState(false);
 
   useEffect(() => {
-    FetchData(setLoading, setData);
+    FetchData(setLoading, setData, setError);
   }, []);
 
   const HeaderData = {

@@ -3,7 +3,12 @@ import {StyleSheet} from 'react-native';
 import {View, Text, Icon} from 'native-base';
 import {ThemeText} from '../../../constants';
 
-const Detailed = ({RiseSetData = null, Wind = null, Humidity = null}) => {
+const Detailed = ({
+  Wind = null,
+  Humidity = null,
+  RiseSetData = null,
+  Summary = null,
+}) => {
   const styles = StyleSheet.create({
     container: {
       width: '100%',
@@ -61,6 +66,7 @@ const Detailed = ({RiseSetData = null, Wind = null, Humidity = null}) => {
           </View>
         </Fragment>
       ) : null}
+      {Summary ? <Text style={styles.text}>{Summary}</Text> : null}
     </View>
   );
 };

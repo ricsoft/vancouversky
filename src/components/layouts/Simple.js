@@ -1,11 +1,10 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {View, Text, Icon} from 'native-base';
-import {ParseIcon} from '../../helpers/Helpers';
 import {ThemeText} from '../../../constants';
 
 const Simple = ({icon, temperature, condition}) => {
-  let {iconName, iconColor} = ParseIcon(icon);
+  let {iconName, iconColor} = icon;
 
   const styles = StyleSheet.create({
     containerView: {

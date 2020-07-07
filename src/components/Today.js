@@ -5,9 +5,6 @@ import Simple from './layouts/Simple';
 import Detailed from './layouts/Detailed';
 
 const Current = ({DetailsEnabled, ForecastData}) => {
-  let wind = ForecastData[0].winds[0] ? true : false;
-  let humidity = ForecastData[0].relativeHumidity[0] ? true : false;
-
   const styles = StyleSheet.create({
     card: {
       marginLeft: 15,
@@ -27,42 +24,27 @@ const Current = ({DetailsEnabled, ForecastData}) => {
     }
   };
 
-  return (
+  let forecast = ForecastData ? (
     <Card style={styles.card}>
       <CardItem>
         <Body>
           {ForecastData.map((data, index) => (
             <View style={AddMargin(index)} key={index}>
-              <Text style={styles.headerText}>
-                {data.period[0].$.textForecastName}
-              </Text>
+              <Text style={styles.headerText}>{data.forecastName}</Text>
               <Simple
-                title={data.period[0].$.textForecastName}
-                icon={data.abbreviatedForecast[0].iconCode[0]._}
-                temperature={data.temperatures[0].temperature[0]._}
-                condition={data.abbreviatedForecast[0].textSummary[0]}
+                icon={data.icon}
+                temperature={data.temperature}
+                condition={data.condition}
               />
-              {DetailsEnabled ? (
-                <Detailed
-                  Wind={
-                    wind
-                      ? {
-                          speed: data.winds[0].wind[0].speed[0]._,
-                          direction: data.winds[0].wind[0].direction[0],
-                        }
-                      : null
-                  }
-                  Humidity={
-                    humidity ? ForecastData[0].relativeHumidity[0]._ : null
-                  }
-                />
-              ) : null}
+              {DetailsEnabled ? <Detailed Summary={data.summary} /> : null}
             </View>
           ))}
         </Body>
       </CardItem>
     </Card>
-  );
+  ) : null;
+
+  return forecast;
 };
 
 export default Current;
