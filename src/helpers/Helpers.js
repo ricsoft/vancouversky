@@ -5,6 +5,7 @@ export const FetchData = async (setLoading, setData) => {
   let data = await fetch(WeatherSource)
     .then(response => response.text())
     .then(text => {
+      console.log('FETCH');
       return text;
     });
 
@@ -29,6 +30,7 @@ export const ParseData = data => {
       10,
     ).toString(),
     condition: data.siteData.currentConditions[0].condition[0],
+    humidity: data.siteData.currentConditions[0].relativeHumidity[0]._,
     wind: {
       speed: data.siteData.currentConditions[0].wind[0].speed[0]._,
       direction: data.siteData.currentConditions[0].wind[0].direction[0],
@@ -64,10 +66,14 @@ export const ParseTime = time => {
 
   // To 12 hr Pacific
   if (newTime > 1200) {
-    newTime -= 1200;
-    m = ' PM';
-    if (newTime > 700) {
-      newTime -= 700;
+    newTime -= 700;
+
+    if (newTime >= 1200) {
+      m = ' PM';
+    }
+
+    if (newTime > 1200) {
+      newTime -= 1200;
     }
   } else if (newTime === 0) {
     newTime = 500;

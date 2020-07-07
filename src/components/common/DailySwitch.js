@@ -3,28 +3,31 @@ import {StyleSheet} from 'react-native';
 import {View, Button, Text} from 'native-base';
 
 const DailySwitch = ({DailyActive, setDailyActive}) => {
-  const HandlePress = () => {
-    setDailyActive(!DailyActive);
+  const DailyPressed = () => {
+    setDailyActive(true);
+  };
+
+  const HourlyPressed = () => {
+    setDailyActive(false);
   };
 
   const styles = StyleSheet.create({
     view: {
-      marginTop: 35,
-      marginBottom: 35,
+      marginTop: 30,
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
     },
     button: {
       borderWidth: 2,
-      width: 125,
-      marginLeft: 6,
-      marginRight: 6,
+      width: 100,
+      marginLeft: 8,
+      marginRight: 8,
       display: 'flex',
       justifyContent: 'center',
     },
     text: {
-      fontSize: 15,
+      fontSize: 12,
     },
   });
 
@@ -35,7 +38,7 @@ const DailySwitch = ({DailyActive, setDailyActive}) => {
         primary={DailyActive}
         rounded
         style={styles.button}
-        onPress={HandlePress}>
+        onPress={DailyPressed}>
         <Text style={styles.text}>Daily</Text>
       </Button>
       <Button
@@ -43,7 +46,7 @@ const DailySwitch = ({DailyActive, setDailyActive}) => {
         primary={!DailyActive}
         rounded
         style={styles.button}
-        onPress={HandlePress}>
+        onPress={HourlyPressed}>
         <Text style={styles.text}>Hourly</Text>
       </Button>
     </View>

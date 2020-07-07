@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {Card, CardItem, Body, Text, View} from 'native-base';
 import Simple from './layouts/Simple';
 
-const Tommorows = ({Forecasts}) => {
+const Tommorows = ({DetailsEnabled, Forecasts}) => {
   const styles = StyleSheet.create({
     card: {
       marginLeft: 15,
@@ -12,8 +12,8 @@ const Tommorows = ({Forecasts}) => {
       paddingBottom: 5,
     },
     headerText: {
-      fontSize: 18,
-      marginBottom: 10,
+      fontSize: 15,
+      marginBottom: 5,
     },
   });
 

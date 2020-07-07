@@ -8,15 +8,18 @@ const Hourly = ({DailyActive, Data}) => {
   let currentColor, previousCondition;
 
   const styles = StyleSheet.create({
+    view: {
+      marginTop: 30,
+    },
     container: {
-      height: 50,
+      minHeight: 45,
       flexDirection: 'row',
     },
     time: {
       width: '24%',
       textAlignVertical: 'center',
       textAlign: 'right',
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: '600',
       color: ThemeText,
     },
@@ -24,7 +27,7 @@ const Hourly = ({DailyActive, Data}) => {
       width: '24%',
       textAlignVertical: 'center',
       textAlign: 'center',
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: '700',
     },
     bar: {
@@ -37,16 +40,17 @@ const Hourly = ({DailyActive, Data}) => {
     },
     icon: {
       marginRight: 8,
-      top: -3,
+      textAlignVertical: 'center',
       fontSize: 25,
     },
     condition: {
-      fontSize: 17,
+      textAlignVertical: 'center',
+      fontSize: 15,
     },
   });
 
   const hourly = DailyActive ? null : (
-    <View>
+    <View style={styles.view}>
       {Data.map((data, index) => {
         let {iconColor} = ParseIcon(data.iconCode[0]._);
         previousCondition = index > 0 ? Data[index - 1].condition[0] : '';

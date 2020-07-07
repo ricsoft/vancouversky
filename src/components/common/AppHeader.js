@@ -23,13 +23,15 @@ const AppHeader = ({
       flex: 1,
     },
     body: {
-      flex: 1,
+      flex: 3,
     },
     title: {
+      fontSize: 17,
       alignSelf: 'center',
       color: ThemeText,
     },
     right: {
+      right: 5,
       flex: 1,
     },
     icon: {
