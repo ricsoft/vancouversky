@@ -67,11 +67,9 @@ export const ParseTime = time => {
   // To 12 hr Pacific
   if (newTime > 1200) {
     newTime -= 700;
-
     if (newTime >= 1200) {
       m = ' PM';
     }
-
     if (newTime > 1200) {
       newTime -= 1200;
     }
