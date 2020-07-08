@@ -13,6 +13,7 @@ import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -22,7 +23,7 @@ public class UpdateWeather extends AsyncTask<Void, Void, String> {
     private int[] appWidgetIds;
     private static String colorKey;
 
-    public UpdateWeather(Context _context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
+    public UpdateWeather(Context _context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         contextRef = new WeakReference<>(_context);
         this.appWidgetManager = appWidgetManager;
         this.appWidgetIds = appWidgetIds;
@@ -31,52 +32,70 @@ public class UpdateWeather extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
         Context context = contextRef.get();
-        String currentWeather, inputLine, htmlCode="";
+        String currentWeather, inputLine, htmlCode = "";
+        int retries = 0;
         String MyPREFERENCES = "Preferences";
         String vanUrl = "https://weather.gc.ca/wxlink/site_js/s0000141_e.js";
 
-        //get configuration from shared pref
+        // get configuration from shared pref
         SharedPreferences sharedPreferences = context.getSharedPreferences(MyPREFERENCES, context.MODE_PRIVATE);
         colorKey = sharedPreferences.getString("colorKey", "White");
 
-        try {
-            URL url = new URL(vanUrl);
+        while (retries < 5) {
+            try {
+                URL url = new URL(vanUrl);
 
-            //get data from web and store in a string
-            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+                // get data from web and store in a string
+                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
-            StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder();
 
-            while ((inputLine = in.readLine()) != null) {
-                sb.append(inputLine);
-                sb.append(System.getProperty("line.separator"));
+                while ((inputLine = in.readLine()) != null) {
+                    sb.append(inputLine);
+                    sb.append(System.getProperty("line.separator"));
+                }
+
+                htmlCode = sb.toString();
+                urlConnection.disconnect();
+
+                if (htmlCode.isEmpty()) {
+                    try {
+                        TimeUnit.MINUTES.sleep(1);
+                    } finally {
+                        retries++;
+                    }
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                break;
             }
+        }
 
-            htmlCode = sb.toString();
-
-            urlConnection.disconnect();
-        } catch (Exception e) { }
-
-        //parse the string
+        // parse the string
         currentWeather = parseHTML(htmlCode);
 
         return currentWeather;
     }
 
     @Override
-    protected void onPostExecute(String result){
+    protected void onPostExecute(String result) {
         Context context = contextRef.get();
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
 
-        String[] results = result.split(" ", 2);
-        views.setTextViewText(R.id.appwidget_number, results[0]);
-        views.setTextViewText(R.id.appwidget_text, results[1]);
+        try {
+            String[] results = result.split(" ", 2);
+            views.setTextViewText(R.id.appwidget_number, results[0]);
+            views.setTextViewText(R.id.appwidget_text, results[1]);
+        } catch (Exception e) {
+            views.setTextViewText(R.id.appwidget_number, "");
+            views.setTextViewText(R.id.appwidget_text, "");
+        }
 
         if (colorKey.equals("White")) {
             views.setTextColor(R.id.appwidget_text, Color.parseColor("#F8F8FF"));
-        }
-        else {
+        } else {
             views.setTextColor(R.id.appwidget_text, Color.parseColor("#212121"));
         }
 
@@ -93,12 +112,12 @@ public class UpdateWeather extends AsyncTask<Void, Void, String> {
 
             Matcher m = p.matcher(htmlCode);
             m.find();
-            //store the current weather degree number
+            // store the current weather degree number
             String num = m.group();
             m.find();
-            //store the current weather description
+            // store the current weather description
             String text = m.group();
-            //get rid of extra characters in the number and description
+            // get rid of extra characters in the number and description
             m = n.matcher(num);
             m.find();
             num = m.group();
@@ -107,7 +126,8 @@ public class UpdateWeather extends AsyncTask<Void, Void, String> {
             text = m.group();
 
             return num + " " + text;
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
 
         return "";
     }
