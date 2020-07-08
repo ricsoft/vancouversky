@@ -74,10 +74,10 @@ public class UpdateWeather extends AsyncTask<Void, Void, String> {
         views.setTextViewText(R.id.appwidget_text, results[1]);
 
         if (colorKey.equals("White")) {
-            views.setTextColor(R.id.appwidget_text, Color.parseColor("#FFFFFF"));
+            views.setTextColor(R.id.appwidget_text, Color.parseColor("#F8F8FF"));
         }
         else {
-            views.setTextColor(R.id.appwidget_text, Color.parseColor("#000000"));
+            views.setTextColor(R.id.appwidget_text, Color.parseColor("#212121"));
         }
 
         for (int appWidgetId : appWidgetIds) {
