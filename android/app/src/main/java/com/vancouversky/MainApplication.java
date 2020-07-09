@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
+import in.sriraman.sharedpreferences.RNSharedPreferencesReactPackage;
 
 public class MainApplication extends NavigationApplication {
   private final ReactNativeHost mReactNativeHost =

@@ -37,6 +37,29 @@ export const FetchData = async (setLoading, setData, setError) => {
   });
 };
 
+export const GetColor = async (setSelectedColor, setLoading) => {
+  const SharedPreferences = require('react-native-shared-preferences');
+  SharedPreferences.setName('Preferences');
+
+  getColor(SharedPreferences)
+    .then(color => setSelectedColor(color))
+    .then(setLoading(false));
+};
+
+export const SaveColor = SelectedColor => {
+  const SharedPreferences = require('react-native-shared-preferences');
+  SharedPreferences.setName('Preferences');
+  SharedPreferences.setItem('colorKey', SelectedColor);
+};
+
+let getColor = SharedPreferences => {
+  return new Promise(resolve =>
+    SharedPreferences.getItem('colorKey', color => {
+      resolve(color);
+    }),
+  );
+};
+
 const ParseData = data => {
   let riseSet = data.siteData.riseSet[0]
     ? {
