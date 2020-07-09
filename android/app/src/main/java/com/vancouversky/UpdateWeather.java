@@ -13,7 +13,6 @@ import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -33,7 +32,6 @@ public class UpdateWeather extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... params) {
         Context context = contextRef.get();
         String currentWeather, inputLine, htmlCode = "";
-        int retries = 0;
         String MyPREFERENCES = "Preferences";
         String vanUrl = "https://weather.gc.ca/wxlink/site_js/s0000141_e.js";
 
@@ -41,37 +39,23 @@ public class UpdateWeather extends AsyncTask<Void, Void, String> {
         SharedPreferences sharedPreferences = context.getSharedPreferences(MyPREFERENCES, context.MODE_PRIVATE);
         colorKey = sharedPreferences.getString("colorKey", "White");
 
-        while (retries < 5) {
-            try {
-                URL url = new URL(vanUrl);
+        try {
+            URL url = new URL(vanUrl);
 
-                // get data from web and store in a string
-                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            // get data from web and store in a string
+            HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 
-                StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-                while ((inputLine = in.readLine()) != null) {
-                    sb.append(inputLine);
-                    sb.append(System.getProperty("line.separator"));
-                }
-
-                htmlCode = sb.toString();
-                urlConnection.disconnect();
-
-                if (htmlCode.isEmpty()) {
-                    try {
-                        TimeUnit.MINUTES.sleep(1);
-                    } finally {
-                        retries++;
-                    }
-                } else {
-                    break;
-                }
-            } catch (Exception e) {
-                break;
+            while ((inputLine = in.readLine()) != null) {
+                sb.append(inputLine);
+                sb.append(System.getProperty("line.separator"));
             }
-        }
+
+            htmlCode = sb.toString();
+            urlConnection.disconnect();
+        } catch (Exception e) {}
 
         // parse the string
         currentWeather = parseHTML(htmlCode);

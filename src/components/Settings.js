@@ -108,6 +108,7 @@ const Settings = ({componentId}) => {
         MenuActive={MenuActive}
         ExitMenu={() => ExitMenu(setMenuActive)}
         isSettings
+        SavePressed={SavePressed}
       />
     </Container>
   );

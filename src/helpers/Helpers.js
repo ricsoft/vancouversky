@@ -13,7 +13,6 @@ export const FetchData = async (setLoading, setData, setError) => {
   let data = await fetch(WeatherSource)
     .then(response => response.text())
     .then(text => {
-      console.log('FETCH');
       return text;
     })
     .catch(err => {

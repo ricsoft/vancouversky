@@ -17,6 +17,7 @@ const Menu = ({
   FetchData = null,
   setLoading = null,
   setData = null,
+  SavePressed = null,
 }) => {
   const RefreshPressed = () => {
     FetchData(setLoading, setData);
@@ -37,6 +38,11 @@ const Menu = ({
     ExitMenu();
     BackHandler.exitApp();
     BackHandler.exitApp();
+  };
+
+  let savePressed = () => {
+    ExitMenu();
+    SavePressed();
   };
 
   const styles = StyleSheet.create({
@@ -78,7 +84,9 @@ const Menu = ({
         <Body style={styles.body}>
           {isSettings ? (
             <TouchableOpacity>
-              <Text style={styles.text}>Save</Text>
+              <Text style={styles.text} onPress={savePressed}>
+                Save
+              </Text>
             </TouchableOpacity>
           ) : (
             <Fragment>
