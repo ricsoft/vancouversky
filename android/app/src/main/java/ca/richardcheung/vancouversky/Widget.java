@@ -1,4 +1,4 @@
-package com.vancouversky;
+package ca.richardcheung.vancouversky;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;

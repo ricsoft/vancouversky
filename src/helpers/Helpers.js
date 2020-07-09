@@ -54,6 +54,10 @@ export const SaveColor = SelectedColor => {
 let getColor = SharedPreferences => {
   return new Promise(resolve =>
     SharedPreferences.getItem('colorKey', color => {
+      if (color === null) {
+        color = 'White';
+      }
+
       resolve(color);
     }),
   );

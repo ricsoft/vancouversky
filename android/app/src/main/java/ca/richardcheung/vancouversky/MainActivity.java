@@ -1,4 +1,4 @@
-package com.vancouversky;
+package ca.richardcheung.vancouversky;
 
 import com.reactnativenavigation.NavigationActivity;
 
